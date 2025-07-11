@@ -4,6 +4,8 @@ import connectDB from './db/index.js';
 import express from 'express';
 const app = express(); // <-- This is missing!
 
+
+
 dotenv.config({ path: './.env' });
 connectDB()
 .then(() => {

@@ -1,23 +1,30 @@
 //require('dotenv').config({path: './.env'});
 import dotenv from 'dotenv';
+dotenv.config({ path: './.env' });
 import connectDB from './db/index.js';
 import express from 'express';
-const app = express(); // <-- This is missing!
+import { app } from './app.js'; // <-- This is missing!
 
 
 
-dotenv.config({ path: './.env' });
+
+console.log('Trying to connect to MongoDB...');
+// app.get('/', (req, res) => {
+//     res.send('Hello from original server!');
+//   });
+  
 connectDB()
-.then(() => {
-
-        app.listen(process.env.PORT || 8000, () => {
-        console.log(`Server is running on port ${process.env.PORT || 8000}`);
+  .then(() => {
+    console.log('MongoDB connected successfully.');
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is running on port ${process.env.PORT || 8000}`);
     });
-})
-.catch((error) => {
+  })
+  .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
-    process.exit(1); // Exit the process with failure
-});
+    process.exit(1);
+  });
+
 
 
 
